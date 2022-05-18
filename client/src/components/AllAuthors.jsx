@@ -8,11 +8,15 @@ const AllAuthors = (props) => {
 
     const {_id} = useParams();
 
+    const sortArray = (x, y) => {
+        return x.name.localeCompare(y.name)
+    }
+
     useEffect(() => {
         axios.get('http://localhost:8000/api/authors')
             .then(res => {
                 console.log ('this is the res: ', res.data.results);
-                setAuthorList(res.data.results)
+                setAuthorList(res.data.results.sort(sortArray))
             })
             .catch(err => {
                 console.log('error: ', err);
